@@ -46,13 +46,13 @@ class Converter(grammar.Grammar):
 
     """
 
-    def run(self, graminit_h, graminit_c):
+    def run(self, graminit_h, graminit_c) -> None:
         """Load the grammar tables from the text files written by pgen."""
         self.parse_graminit_h(graminit_h)
         self.parse_graminit_c(graminit_c)
         self.finish_off()
 
-    def parse_graminit_h(self, filename):
+    def parse_graminit_h(self, filename) -> bool:
         """Parse the .h file written by pgen.  (Internal)
 
         This file is a sequence of #define statements defining the
@@ -82,7 +82,7 @@ class Converter(grammar.Grammar):
                 self.number2symbol[number] = symbol
         return True
 
-    def parse_graminit_c(self, filename):
+    def parse_graminit_c(self, filename) -> bool | None:
         """Parse the .c file written by pgen.  (Internal)
 
         The file looks as follows.  The first two lines are always this:
@@ -245,7 +245,7 @@ class Converter(grammar.Grammar):
         else:
             assert 0, (lineno, line)
 
-    def finish_off(self):
+    def finish_off(self) -> None:
         """Create additional useful structures.  (Internal)."""
         self.keywords = {}  # map from keyword strings to arc labels
         self.tokens = {}  # map from numeric token values to arc labels

@@ -140,7 +140,7 @@ class ParserGenerator:
                 if label in self.first:
                     fset = self.first[label]
                     if fset is None:
-                        raise ValueError("recursion for rule %r" % name)
+                        raise ValueError(f"recursion for rule {name!r}")
                 else:
                     self.calcfirst(label)
                     fset = self.first[label]
@@ -155,8 +155,8 @@ class ParserGenerator:
             for symbol in itsfirst:
                 if symbol in inverse:
                     raise ValueError(
-                        "rule %s is ambiguous; %s is in the first sets of %s as well"
-                        " as %s" % (name, symbol, label, inverse[symbol])
+                        f"rule {name} is ambiguous; {symbol} is in the first sets of {label} as well"
+                        f" as {inverse[symbol]}"
                     )
                 inverse[symbol] = label
         self.first[name] = totalset
